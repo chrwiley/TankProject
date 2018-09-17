@@ -5,7 +5,7 @@ using UnityEngine;
 public class TankHealth : MonoBehaviour {
 
     public TankData data;
-    
+    public float currentHealth;
      
 
     public void TakeDamage(int amount) //subtracts damage from health

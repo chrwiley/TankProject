@@ -5,6 +5,7 @@ using UnityEngine;
 public class TankMotor : MonoBehaviour
 {
     public TankData data;
+    private Transform tf;
 
     private CharacterController characterController; //holds our character controller component
     public GameObject shellPrefab;
@@ -12,14 +13,19 @@ public class TankMotor : MonoBehaviour
 
     
 
+
+    
+
     // Use this for initialization
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();  //stores in a variable
+        tf = gameObject.GetComponent<Transform>();
 
     }
 
     
+
     //Move function
     public void Move(float speed)
     {
@@ -36,6 +42,23 @@ public class TankMotor : MonoBehaviour
         transform.Rotate(rotateVector, Space.Self); // rotates in local space
     }
 
+    //stub function RotateTowards(Target, speed)  if we need to move it returns true, otherwise we are already in the right direction
+    public bool RotateTowards (Vector3 target, float speed)
+    {
+        Vector3 vectorToTarget = target - tf.position;
+
+        Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget);  //slows things down a bit
+
+        if (targetRotation == tf.rotation)
+        {
+            return false;
+        }
+
+        tf.rotation = Quaternion.RotateTowards(tf.rotation, targetRotation, data.turnLeftSpeed * Time.deltaTime);
+
+
+        return true;
+    }
    
 
 }

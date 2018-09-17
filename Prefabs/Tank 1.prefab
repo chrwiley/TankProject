@@ -158,9 +158,10 @@ GameObject:
   - component: {fileID: 114060093775696022}
   - component: {fileID: 114803737053760580}
   - component: {fileID: 114373682772953876}
+  - component: {fileID: 54639048905673316}
   m_Layer: 0
   m_Name: Tank 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,8 +211,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923653831268330}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.97, z: 0}
+  m_LocalRotation: {x: 0.0000000041129185, y: 0.9821336, z: 0.000000021465237, w: 0.18818493}
+  m_LocalPosition: {x: 6.863272, y: 1.08, z: -15.386063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4410021050628518}
@@ -543,6 +544,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499624663843828}
   m_Mesh: {fileID: 4300000, guid: 80a7bacedbee0124c8f78298c418a232, type: 3}
+--- !u!54 &54639048905673316
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923653831268330}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65651832446831534
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -550,10 +566,10 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923653831268330}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1.5}
+  m_Size: {x: 2.5, y: 2.5, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81425565021253950
 AudioListener:
@@ -591,7 +607,13 @@ MonoBehaviour:
   minLaunchForce: 15
   maxLaunchForce: 30
   maxChargeTime: 0.75
-  currentHealth: 100
+  closeEnough: 1
+  fleeDistance: 1
+  avoidanceTime: 2
+  stateEnterTime: 0
+  aiSenseRadius: 0
+  restingHealRate: 0
+  lastShootTime: 0
 --- !u!114 &114373682772953876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -604,6 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 114060093775696022}
+  currentHealth: 0
 --- !u!114 &114803737053760580
 MonoBehaviour:
   m_ObjectHideFlags: 1

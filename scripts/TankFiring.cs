@@ -19,13 +19,13 @@ public class TankFiring : MonoBehaviour
     private bool fired;
 
 
-    private void OnEnable()
+    public void OnEnable()
     {
         currentLaunchForce = data.minLaunchForce;  //sets the minimum when you starting aiming
     }
 
 
-    private void Start()
+    public void Start()
     {
        fireButton = "Fire1"; //
 

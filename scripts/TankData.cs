@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankData : MonoBehaviour {
+public class TankData : MonoBehaviour
+{
 
-    
+
     public float moveForwardSpeed = 3; //meters per second
     public float moveBackwardSpeed = 3;
     public float turnLeftSpeed = 180;//degrees per second
@@ -22,4 +23,15 @@ public class TankData : MonoBehaviour {
     public float maxChargeTime = 0.75f;
 
     public const int maxHealth = 100;  //maximum health
+
+
+    public float closeEnough = 1.0f;  //how close do we want enemy AI to get 
+    public float fleeDistance = 1.0f; //run, run away
+    public float avoidanceTime = 2.0f;
+    public float stateEnterTime; 
+    public float aiSenseRadius = 1;
+    public float restingHealRate = 1;
+    public float lastShootTime=0;
+
 }
+

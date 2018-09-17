@@ -9,18 +9,20 @@ public class InputController : MonoBehaviour
     public TankData data;
     public TankFiring firing;
 
+    
     private const char W = 'w';  //had to make WASD characters to work in the switch case
     private const char S = 's';
     private const char A = 'a';
     private const char D = 'd';
 
     
+
     private float currentLaunchForce;  //information on the bullets
     private float chargeSpeed;
     private bool fired;  //has it been fired or not 
     private float nextFire;  //fire delay timer 
 
-    public enum InputScheme { WASD, ArrowKeys };
+    public enum InputScheme { WASD, ArrowKeys };  //enum for movement
     public InputScheme input = InputScheme.WASD;
 
     private void Update()
@@ -110,7 +112,10 @@ public class InputController : MonoBehaviour
                 firing.Fire();
             }
         }
-        
+
+
+
+                
     }
 }
 

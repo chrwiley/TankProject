@@ -21,14 +21,15 @@ GameObject:
   - component: {fileID: 4115465662532618}
   - component: {fileID: 143926741387971352}
   - component: {fileID: 65619230918491096}
-  - component: {fileID: 114988033525493322}
   - component: {fileID: 114586191275931112}
   - component: {fileID: 114763881910453626}
   - component: {fileID: 114989876776875502}
   - component: {fileID: 114605336765327920}
-  m_Layer: 9
+  - component: {fileID: 114151462832367820}
+  - component: {fileID: 54187912071288268}
+  m_Layer: 0
   m_Name: EnemyTank
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,8 +138,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1044952339892634}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.922409, y: 1.02, z: -18.240644}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.922409, y: 1.02, z: -10.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4665156391128232}
@@ -401,6 +402,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1348464678173766}
   m_Mesh: {fileID: 4300006, guid: 80a7bacedbee0124c8f78298c418a232, type: 3}
+--- !u!54 &54187912071288268
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1044952339892634}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65619230918491096
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -408,11 +424,30 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1044952339892634}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1.5}
+  m_Size: {x: 2.5, y: 2.5, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114151462832367820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1044952339892634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532c14800306ee74bbabe6270cf80cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motor: {fileID: 114763881910453626}
+  data: {fileID: 114586191275931112}
+  firing: {fileID: 114989876776875502}
+  thealth: {fileID: 114605336765327920}
+  waypoints: []
+  loopType: 1
+  aiState: 0
+  target: {fileID: 0}
 --- !u!114 &114586191275931112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -435,7 +470,13 @@ MonoBehaviour:
   minLaunchForce: 15
   maxLaunchForce: 30
   maxChargeTime: 0.75
-  currentHealth: 100
+  closeEnough: 1
+  fleeDistance: 1
+  avoidanceTime: 2
+  stateEnterTime: 0
+  aiSenseRadius: 0
+  restingHealRate: 0
+  lastShootTime: 0
 --- !u!114 &114605336765327920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 114586191275931112}
+  currentHealth: 0
 --- !u!114 &114763881910453626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -463,21 +505,6 @@ MonoBehaviour:
   shellPrefab: {fileID: 1907835482894970, guid: 56e8fcaa618b6e2409d210a68383daf2,
     type: 2}
   shellSpawn: {fileID: 4115861396703378}
---- !u!114 &114988033525493322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044952339892634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ca34fc73e715e48b272e4fac362e87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motor: {fileID: 114763881910453626}
-  data: {fileID: 114586191275931112}
-  firing: {fileID: 114989876776875502}
-  input: 1
 --- !u!114 &114989876776875502
 MonoBehaviour:
   m_ObjectHideFlags: 1
