@@ -28,9 +28,9 @@ public class EnemyAI : MonoBehaviour
 
     public Transform target;
     
-    private int avoidanceStage = 0;  //information for ai state
-    private float exitTime;
-    private int maxHealth = 100;
+    public int avoidanceStage = 0;  //information for ai state
+    public float exitTime;
+    public float maxHealth = 100;
 
 
     //saving the transform
@@ -124,7 +124,7 @@ public class EnemyAI : MonoBehaviour
             {
                 ChangeState(AIState.CheckForFlee);
             }
-            else if (Vector3.Distance(target.position, tf.position) <= data.aiSenseRadius)
+            else if (Vector3.SqrMagnitude(target.position - tf.position) <= (data.aiSenseRadius * data.aiSenseRadius))
             {
                 ChangeState(AIState.ChaseAndFire);
             }
@@ -152,7 +152,7 @@ public class EnemyAI : MonoBehaviour
             {
                 ChangeState(AIState.CheckForFlee);
             }
-            else if (Vector3.Distance(target.position, tf.position) > data.aiSenseRadius)
+            else if (Vector3.SqrMagnitude(target.position - tf.position) <= (data.aiSenseRadius * data.aiSenseRadius))
             {
                 ChangeState(AIState.Chase);
             }
@@ -181,7 +181,7 @@ public class EnemyAI : MonoBehaviour
             CheckForFlee();
 
             // Check for Transitions
-            if (Vector3.Distance(target.position, tf.position) <= data.aiSenseRadius)
+            if (Vector3.SqrMagnitude(target.position - tf.position) <= (data.aiSenseRadius * data.aiSenseRadius))
             {
                 ChangeState(AIState.Flee);
             }
@@ -196,7 +196,7 @@ public class EnemyAI : MonoBehaviour
             DoRest();
 
             // Check for Transitions
-            if (Vector3.Distance(target.position, tf.position) <= data.aiSenseRadius)
+            if (Vector3.SqrMagnitude(target.position - tf.position) <= (data.aiSenseRadius * data.aiSenseRadius))
             {
                 ChangeState(AIState.Flee);
             }

@@ -17,13 +17,13 @@ public class TankData : MonoBehaviour
     public float fireForce = 1000; //force of shell
     public float fireRate = 4; //time delay of refire
 
+    public float maxHealth = 100;  //maximum health
+    public float currentHealth;
+
     public Transform fireTransform;
     public float minLaunchForce = 15f; //smallest force
     public float maxLaunchForce = 30f; //largest force
     public float maxChargeTime = 0.75f;
-
-    public const int maxHealth = 100;  //maximum health
-
 
     public float closeEnough = 1.0f;  //how close do we want enemy AI to get 
     public float fleeDistance = 1.0f; //run, run away

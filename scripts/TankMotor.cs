@@ -59,6 +59,16 @@ public class TankMotor : MonoBehaviour
 
         return true;
     }
-   
+
+    public void TakeDamage(int amount) //subtracts damage from health
+    {
+        var currentHealth = data.maxHealth;
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Debug.Log("Dead!");
+        }
+    }
 
 }

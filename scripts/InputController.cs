@@ -17,10 +17,7 @@ public class InputController : MonoBehaviour
 
     
 
-    private float currentLaunchForce;  //information on the bullets
-    private float chargeSpeed;
-    private bool fired;  //has it been fired or not 
-    private float nextFire;  //fire delay timer 
+    
 
     public enum InputScheme { WASD, ArrowKeys };  //enum for movement
     public InputScheme input = InputScheme.WASD;
@@ -76,39 +73,39 @@ public class InputController : MonoBehaviour
 
         if (Time.time > data.fireRate)
         {
-            if (currentLaunchForce >= data.maxLaunchForce && !fired)
+            if (firing.currentLaunchForce >= data.maxLaunchForce && !firing.fired)
             {
                 // at max xharge not yet fired
-                currentLaunchForce = data.maxLaunchForce;
+                firing.currentLaunchForce = data.maxLaunchForce;
                 firing.Fire();
             }
             else if (Input.GetButtonDown("Fire1"))
             {
                 //has the button been pressed for the first time
-                fired = false;
-                currentLaunchForce = data.minLaunchForce; //sets back to minimum
+                firing.fired = false;
+                firing.currentLaunchForce = data.minLaunchForce; //sets back to minimum
 
             }
-            else if (Input.GetButton("Fire1") && !fired)
+            else if (Input.GetButton("Fire1") && !firing.fired)
             {
                 //holding the button
-                currentLaunchForce += chargeSpeed * Time.deltaTime;  //increases force accordingly
+                firing.currentLaunchForce += firing.chargeSpeed * Time.deltaTime;  //increases force accordingly
 
 
             }
-            else if (Input.GetButtonUp("Fire1") && !fired)
+            else if (Input.GetButtonUp("Fire1") && !firing.fired)
             {
                 //release the button
                 firing.Fire();
             }
-            nextFire = Time.time + data.fireRate;
+            firing.nextFire = Time.time + data.fireRate;
         }
 
         if (data.playerNumber == 2) //continuous shooting for player 2 
         {
             if (Time.time > data.fireRate)
             {
-                nextFire = Time.time + data.fireRate;
+                firing.nextFire = Time.time + data.fireRate;
                 firing.Fire();
             }
         }

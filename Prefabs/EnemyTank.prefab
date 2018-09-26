@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114605336765327920}
   - component: {fileID: 114151462832367820}
   - component: {fileID: 54187912071288268}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyTank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -448,6 +448,9 @@ MonoBehaviour:
   loopType: 1
   aiState: 0
   target: {fileID: 0}
+  avoidanceStage: 0
+  exitTime: 0
+  maxHealth: 100
 --- !u!114 &114586191275931112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,6 +469,8 @@ MonoBehaviour:
   playerNumber: 2
   fireForce: 10
   fireRate: 2
+  maxHealth: 100
+  currentHealth: 0
   fireTransform: {fileID: 4115861396703378}
   minLaunchForce: 15
   maxLaunchForce: 30
@@ -473,7 +478,7 @@ MonoBehaviour:
   closeEnough: 1
   fleeDistance: 1
   avoidanceTime: 2
-  stateEnterTime: 0
+  stateEnterTime: 0.02
   aiSenseRadius: 0
   restingHealRate: 0
   lastShootTime: 0
@@ -520,6 +525,10 @@ MonoBehaviour:
   shellPrefab: {fileID: 1907835482894970, guid: 56e8fcaa618b6e2409d210a68383daf2,
     type: 2}
   shellSpawn: {fileID: 4115861396703378}
+  currentLaunchForce: 0
+  chargeSpeed: 0
+  nextFire: 0
+  fired: 0
 --- !u!143 &143926741387971352
 CharacterController:
   m_ObjectHideFlags: 1

@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class TankFiring : MonoBehaviour
 {
-    //public variables
-    //public Rigidbody m_Shell;            //reference shell prefab
-    
-
+   
     public TankData data;
     public GameObject shellPrefab;
     public Transform shellSpawn;
 
     //private member variables
-    private string fireButton;
-    private float currentLaunchForce;
-    private float chargeSpeed;
-    private bool fired;
+    //private string fireButton;
+    public float currentLaunchForce;
+    public float chargeSpeed;
+    public float nextFire;
+    public bool fired;
 
 
     public void OnEnable()
@@ -27,7 +25,7 @@ public class TankFiring : MonoBehaviour
 
     public void Start()
     {
-       fireButton = "Fire1"; //
+       //fireButton = "Fire1"; //
 
        chargeSpeed = (data.maxLaunchForce - data.minLaunchForce) / data.maxChargeTime;  //how long does it take to fully charge
     }

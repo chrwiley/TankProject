@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 114803737053760580}
   - component: {fileID: 114373682772953876}
   - component: {fileID: 54639048905673316}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tank 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -603,6 +603,8 @@ MonoBehaviour:
   playerNumber: 1
   fireForce: 10
   fireRate: 2
+  maxHealth: 100
+  currentHealth: 0
   fireTransform: {fileID: 4875765241344700}
   minLaunchForce: 15
   maxLaunchForce: 30
@@ -642,6 +644,10 @@ MonoBehaviour:
   shellPrefab: {fileID: 1914695542047942, guid: 386b85f859223b24990440162c96d24d,
     type: 2}
   shellSpawn: {fileID: 4875765241344700}
+  currentLaunchForce: 0
+  chargeSpeed: 0
+  nextFire: 0
+  fired: 0
 --- !u!114 &114894576554307314
 MonoBehaviour:
   m_ObjectHideFlags: 1
