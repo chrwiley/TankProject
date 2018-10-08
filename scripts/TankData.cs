@@ -13,6 +13,8 @@ public class TankData : MonoBehaviour
 
     public int playerNumber; //tank numbers
 
+    public AudioClip tankSound;
+
 
     public float fireForce = 1000; //force of shell
     public float fireRate = 4; //time delay of refire

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    GameObject player;                          // Reference to the player GameObject.
 
     public TankMotor motor;  //call other scripts 
     public TankData data;
     public TankFiring firing;
     public TankHealth thealth;
 
-    public Transform[] waypoints; //array for waypoints
+    private Transform[] waypoints; //array for waypoints
 
     private int currentWaypoint = 0;  //information for waypoints 
     
@@ -18,7 +19,13 @@ public class EnemyAI : MonoBehaviour
 
     private float nextFire;  //fire delay timer 
 
+
+    public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
+    public int attackDamage = 10;               // The amount of health taken away per attack.
+
+    bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     
+
     public enum LoopType { Stop, Loop, PingPong }; //for the waypoint loop
     public LoopType loopType;
     private bool isPatrolForward = true;
@@ -30,18 +37,68 @@ public class EnemyAI : MonoBehaviour
     
     public int avoidanceStage = 0;  //information for ai state
     public float exitTime;
-    public float maxHealth = 100;
+    //public float maxHealth = 100;
 
 
     //saving the transform
     public void Awake()
     {
         tf = gameObject.GetComponent<Transform>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void Update()
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+    private void OnTriggerEnter(Collider other)
     {
+        // If the entering collider is the player...
+        if (other.gameObject == player)
+        {
+            // ... the player is in range.
+            playerInRange = true;
+        }
+    }
+
+
+    void OnTriggerExit(Collider other)
+    {
+        // If the exiting collider is the player...
+        if (other.gameObject == player)
+        {
+            // ... the player is no longer in range.
+            playerInRange = false;
+        }
+    }
+
+    void Attack()
+    {
+        // Reset the timer.
+        nextFire = 0f;
+
+        // If the player has health to lose...
+        if (thealth.currentHealth > 0)
+        {
+            // ... damage the player.
+            thealth.TakeDamage(attackDamage);
+        }
+    }
+
+
+
+
+private void Update()
+    {
+        // Add the time since Update was last called to the timer.
+        nextFire += Time.deltaTime;
+
+        // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
+        if (nextFire >= timeBetweenAttacks && playerInRange && thealth.currentHealth > 0)
+        {
+            // ... attack.
+            Attack();
+        }
+
+
+
         //make the enemy tank go through the waypoints 
         if (motor.RotateTowards(waypoints[currentWaypoint].position, data.turnLeftSpeed)) //we are already in the right direction
         {
@@ -120,7 +177,7 @@ public class EnemyAI : MonoBehaviour
             }
 
             // what is our health status
-            if (thealth.currentHealth < maxHealth * 0.5f)
+            if (thealth.currentHealth < data.maxHealth * 0.5f)
             {
                 ChangeState(AIState.CheckForFlee);
             }
@@ -148,7 +205,7 @@ public class EnemyAI : MonoBehaviour
                 }
             }
             // Check for Transitions
-            if (thealth.currentHealth < maxHealth * 0.5f)
+            if (thealth.currentHealth < data.maxHealth * 0.5f)
             {
                 ChangeState(AIState.CheckForFlee);
             }
@@ -200,7 +257,7 @@ public class EnemyAI : MonoBehaviour
             {
                 ChangeState(AIState.Flee);
             }
-            else if (thealth.currentHealth >= maxHealth)
+            else if (thealth.currentHealth >= data.maxHealth)
             {
                 ChangeState(AIState.Chase);
             }
@@ -309,5 +366,7 @@ public class EnemyAI : MonoBehaviour
 
 
 
+    
 
 
+    

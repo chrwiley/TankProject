@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpController : MonoBehaviour
 {
 
-    public List<Powerup> powerups;  //dynamic list for powerups
+    private List<Powerup> powerups;  //dynamic list for powerups
     public TankData data;
     
 

@@ -11,6 +11,8 @@ public class InstantiateTanks : MonoBehaviour {
     public Transform enemyTankSpawn;
     public GameObject playerTankPrefab;
     public Transform playerTankSpawn;
+    public GameObject playerTank2Prefab;
+    public Transform playerTank2Spawn;
 
 
     // Use this for initialization
@@ -29,6 +31,8 @@ public class InstantiateTanks : MonoBehaviour {
     void CreateTanks() //create the enemy tanks 
     {
         var playerTank = (GameObject)Instantiate(playerTankPrefab, playerTankSpawn.position, playerTankSpawn.rotation);
+
+        var playerTank2 = (GameObject)Instantiate(playerTank2Prefab, playerTank2Spawn.position, playerTank2Spawn.rotation);
 
         for (int i = 0; i <= numberEnemyTanks; i++)
         {
